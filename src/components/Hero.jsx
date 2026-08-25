@@ -11,7 +11,7 @@ const HEADING_PHRASES = [
 ]
 
 export default function Hero() {
-  const dotsRef = useRef(null)
+  const bgRef = useRef(null)
   const glowRef = useRef(null)
   const reduceRef = useRef(
     typeof window !== 'undefined' &&
@@ -24,11 +24,10 @@ export default function Hero() {
     const x = (e.clientX - rect.left) / rect.width - 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5
 
-    if (dotsRef.current) {
-      dotsRef.current.style.transform =
-        `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) ` +
-        `rotateY(${(x * 8).toFixed(2)}deg) scale(1.08) ` +
-        `translate(${(x * 16).toFixed(1)}px, ${(y * 16).toFixed(1)}px)`
+    if (bgRef.current) {
+      bgRef.current.style.transform =
+        `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) ` +
+        `rotateY(${(x * 6).toFixed(2)}deg) scale(1.04)`
     }
     if (glowRef.current) {
       glowRef.current.style.opacity = '1'
@@ -38,9 +37,9 @@ export default function Hero() {
   }
 
   const handleLeave = () => {
-    if (dotsRef.current) {
-      dotsRef.current.style.transform =
-        'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1.05) translate(0px, 0px)'
+    if (bgRef.current) {
+      bgRef.current.style.transform =
+        'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1.04)'
     }
     if (glowRef.current) glowRef.current.style.opacity = '0'
   }
@@ -57,18 +56,50 @@ export default function Hero() {
       onMouseLeave={handleLeave}
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16 text-center"
     >
-      {/* 3D white dotted background */}
+      {/* Creative 3D background (mouse-reactive) */}
       <div
-        ref={dotsRef}
+        ref={bgRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-70 transition-transform duration-300 ease-out"
+        className="pointer-events-none absolute inset-0 origin-center transition-transform duration-300 ease-out"
         style={{
-          backgroundImage:
-            'radial-gradient(circle at center, rgba(255,255,255,0.22) 1px, transparent 1.6px)',
-          backgroundSize: '24px 24px',
-          transform: 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1.05)',
+          transform:
+            'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1.04)',
         }}
-      />
+      >
+        {/* Soft depth glow */}
+        <div className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
+
+        {/* Perspective grid floor */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-2/3 origin-bottom animate-grid-scroll"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px)',
+            backgroundSize: '44px 44px',
+            transform: 'perspective(420px) rotateX(62deg)',
+            maskImage: 'linear-gradient(to top, black, transparent 78%)',
+            WebkitMaskImage: 'linear-gradient(to top, black, transparent 78%)',
+          }}
+        />
+
+        {/* Floating orbs */}
+        <div className="absolute left-[16%] top-[24%] h-44 w-44 rounded-full bg-white/10 blur-3xl animate-orb-float" />
+        <div
+          className="absolute right-[14%] top-[32%] h-28 w-28 rounded-full bg-white/[0.08] blur-3xl animate-orb-float"
+          style={{ animationDelay: '1.6s' }}
+        />
+
+        {/* Faint dot texture */}
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at center, rgba(255,255,255,0.16) 1px, transparent 1.6px)',
+            backgroundSize: '26px 26px',
+          }}
+        />
+      </div>
+
       {/* Cursor-following glow */}
       <div
         ref={glowRef}
@@ -80,7 +111,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="container-page relative flex flex-col items-center">
+      <div className="container-page relative flex flex-col items-center pb-24">
         {/* Eyebrow — above the image */}
         <p className="label flex items-center justify-center gap-3">
           <span className="h-px w-8 bg-paper/60" />
@@ -88,22 +119,21 @@ export default function Hero() {
           <span className="h-px w-8 bg-paper/60" />
         </p>
 
-        {/* Centered monogram / abstract developer graphic */}
+        {/* Profile photo (centered) */}
         <div className="relative my-10">
-          <span className="absolute -inset-6 rounded-full border border-dashed border-white/15" />
-          <div className="relative grid h-40 w-40 place-items-center rounded-full border border-white/15 bg-ink-card shadow-[0_0_60px_-15px_rgba(255,255,255,0.25)]">
-            <span className="absolute inset-0 grid place-items-center font-display text-7xl font-bold text-white/5">
-              BS
-            </span>
-            <span className="relative font-display text-5xl font-bold text-paper">
-              BS
-            </span>
+          <span className="absolute -inset-4 rounded-full border border-dashed border-white/15" />
+          <div className="relative h-40 w-40 overflow-hidden rounded-full border border-white/15 bg-ink-card shadow-[0_0_60px_-15px_rgba(255,255,255,0.35)]">
+            <img
+              src="/profile.png"
+              alt="Bharat Sah"
+              className="h-full w-full object-cover"
+            />
           </div>
           <span className="absolute -right-2 -top-2 h-3 w-3 rounded-full border border-paper bg-ink" />
           <span className="absolute -bottom-2 -left-2 h-2 w-2 rounded-full bg-paper" />
         </div>
 
-        {/* Rotating, cursorless typing heading */}
+        {/* Rotating, cursorless typing heading — centered */}
         <h1 className="mt-2 font-display text-4xl font-bold leading-tight text-chalk text-balance sm:text-6xl">
           <RotatingTypewriter phrases={HEADING_PHRASES} />
         </h1>
@@ -148,7 +178,7 @@ export default function Hero() {
         </dl>
       </div>
 
-      {/* Scroll-down indicator */}
+      {/* Scroll-down indicator (clear of content) */}
       <button
         type="button"
         onClick={() => scrollTo('about')}

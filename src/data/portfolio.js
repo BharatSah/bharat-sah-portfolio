@@ -9,8 +9,7 @@ export const profile = {
   role: 'Aspiring Junior React Developer',
   eyebrow: 'Welcome to my portfolio',
   headline: "Hi, I'm Bharat Sah",
-  subtitle:
-    'I build practical, responsive web experiences with HTML, Tailwind CSS, JavaScript, and React.',
+  subtitle: 'Building simple solutions to complex problems.',
   about:
     'I’m a motivated computer science graduate who enjoys creating useful websites and learning through practical projects. I like turning ideas into clean, responsive interfaces and getting better at front-end development one build at a time.',
   // Replace with a real resume link or a file placed in /public (e.g. /resume.pdf)

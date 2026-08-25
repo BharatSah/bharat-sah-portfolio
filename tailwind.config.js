@@ -44,11 +44,21 @@ export default {
           '0%, 100%': { transform: 'translateY(0)', opacity: '0.4' },
           '50%': { transform: 'translateY(6px)', opacity: '1' },
         },
+        'grid-scroll': {
+          from: { backgroundPosition: '0 0' },
+          to: { backgroundPosition: '0 44px' },
+        },
+        'orb-float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-18px)' },
+        },
       },
       animation: {
         'accent-grow': 'accent-grow 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
         'fade-up': 'fade-up 0.7s cubic-bezier(0.22,1,0.36,1) forwards',
         'scroll-bounce': 'scroll-bounce 1.8s ease-in-out infinite',
+        'grid-scroll': 'grid-scroll 3.5s linear infinite',
+        'orb-float': 'orb-float 7s ease-in-out infinite',
       },
     },
   },
