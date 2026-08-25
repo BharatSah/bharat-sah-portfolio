@@ -1,0 +1,17 @@
+# Dependency / build ignores
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables (keep .env.example, ignore real .env)
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.log
