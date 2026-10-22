@@ -1,25 +1,125 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>Bharat Sah — Aspiring Junior React Developer</title>
     <meta
       name="description"
-      content="Bharat Sah — +2 Computer Science graduate and aspiring Junior React Developer. I build practical, responsive web experiences with HTML, Tailwind CSS, JavaScript, and React."
+      content="Bharat Sah is an aspiring Junior React Developer and +2 Computer Science graduate building practical, responsive web experiences with React, JavaScript, and Tailwind CSS."
     />
-    <title>Bharat Sah — Aspiring Junior React Developer</title>
+    <meta name="author" content="Bharat Sah" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="canonical" href="https://bharatsah.com.np/" />
 
-    <!-- Fonts: strong modern sans-serif display + clean body + mono labels -->
+    <!-- Keep the first paint dark even if the app stylesheet or bundle is unavailable. -->
+    <style>
+      :root { color-scheme: dark; background: #0a0a0b; }
+      html, body { min-height: 100%; margin: 0; background-color: #0a0a0b; }
+      body {
+        color: #ededed;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        background-image: radial-gradient(900px 500px at 80% -10%, rgba(255, 255, 255, 0.04), transparent 60%), linear-gradient(to bottom, #0a0a0b, #0a0a0b);
+      }
+      #root { min-height: 100vh; }
+      .boot-fallback {
+        box-sizing: border-box;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+      .boot-fallback__mark {
+        display: grid;
+        width: 2.75rem;
+        height: 2.75rem;
+        place-items: center;
+        border: 1px solid #303030;
+        border-radius: 0.8rem;
+        color: #ffffff;
+        font-weight: 700;
+      }
+      .boot-fallback__eyebrow {
+        margin: 2rem 0 0;
+        color: #ffffff;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+      }
+      .boot-fallback__title {
+        margin: 0.8rem 0 0;
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        line-height: 1.1;
+      }
+      .boot-fallback__copy { max-width: 34rem; color: #a3a3a8; line-height: 1.7; }
+      .boot-fallback__button {
+        margin-top: 1rem;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.75rem 1.2rem;
+        background: #ffffff;
+        color: #0a0a0b;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bharat Sah — Portfolio" />
+    <meta property="og:title" content="Bharat Sah — Aspiring Junior React Developer" />
+    <meta
+      property="og:description"
+      content="A +2 Computer Science graduate building practical, responsive web experiences with React, JavaScript, and Tailwind CSS."
+    />
+    <meta property="og:url" content="https://bharatsah.com.np/" />
+    <meta property="og:image" content="/portfolio-screenshot.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bharat Sah — Aspiring Junior React Developer" />
+    <meta
+      name="twitter:description"
+      content="A +2 Computer Science graduate building practical, responsive web experiences with React, JavaScript, and Tailwind CSS."
+    />
+    <meta name="twitter:image" content="/portfolio-screenshot.png" />
+
+    <!-- Fonts: fallbacks above remain readable if these requests fail. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bharat Sah",
+        "jobTitle": "Aspiring Junior React Developer",
+        "url": "https://bharatsah.com.np/",
+        "sameAs": [
+          "https://github.com/bharatsah",
+          "https://www.linkedin.com/in/bharatsah"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p class="boot-fallback__copy">This portfolio needs JavaScript enabled to show the full experience.</p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

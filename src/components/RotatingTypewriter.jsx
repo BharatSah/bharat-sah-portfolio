@@ -9,8 +9,8 @@ function reducedMotion() {
 
 // Continuously types, pauses, deletes, then types the next phrase — looping
 // forever. No blinking cursor. Reserves the widest phrase's width so the
-// centered heading doesn't jitter. Honors prefers-reduced-motion (shows the
-// first phrase statically).
+// heading doesn't jitter. Honors prefers-reduced-motion (shows the first
+// phrase statically).
 export default function RotatingTypewriter({
   phrases,
   typeSpeed = 75,
@@ -50,7 +50,7 @@ export default function RotatingTypewriter({
   }, [text, deleting, phraseIdx, phrases, typeSpeed, deleteSpeed, pause])
 
   return (
-    <span className={`relative inline-block text-left ${className}`}>
+    <span className={`relative inline-block ${className}`}>
       {/* Invisible sizer = widest phrase keeps layout stable */}
       <span className="invisible" aria-hidden="true">
         {widest}

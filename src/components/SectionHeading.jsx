@@ -1,21 +1,30 @@
 import Reveal from './Reveal'
+import SectionBadge from './SectionBadge'
+import { useSplitReveal } from '../hooks/useSplitReveal'
 
 // Standardized, attractive section header used across the page.
-export default function SectionHeading({ index, label, title, description }) {
+// The title uses a split-text reveal; the label and description fade in via
+// Reveal (kept separate so the title isn't double-faded).
+export default function SectionHeading({ label, title, description }) {
+  const titleRef = useSplitReveal()
+
   return (
-    <Reveal>
-      <p className="label flex items-center gap-3">
-        <span className="h-px w-8 bg-paper/50" />
-        <span className="text-paper">{index}</span>
-        <span className="text-chalk-faint">—</span>
-        <span>{label}</span>
-      </p>
-      <h2 className="section-title mt-3">{title}</h2>
-      {/* Animated accent line */}
-      <span className="mt-5 block h-px w-16 origin-left bg-paper/70 animate-accent-grow" />
-      {description && (
-        <p className="mt-5 max-w-2xl text-chalk-muted">{description}</p>
-      )}
-    </Reveal>
+    <div className="text-center">
+      <Reveal>
+        <p className="label flex justify-center">
+          <SectionBadge>{label}</SectionBadge>
+        </p>
+      </Reveal>
+
+      <h2 ref={titleRef} className="section-title mx-auto mt-2 max-w-5xl text-balance text-center">
+        {title}
+      </h2>
+
+      <Reveal delay={80}>
+        {description && (
+          <p className="mx-auto mt-2 max-w-2xl text-center text-chalk-muted">{description}</p>
+        )}
+      </Reveal>
+    </div>
   )
 }

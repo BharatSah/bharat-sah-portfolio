@@ -7,11 +7,12 @@
 export const profile = {
   name: 'Bharat Sah',
   role: 'Aspiring Junior React Developer',
-  eyebrow: 'Welcome to my portfolio',
-  headline: "Hi, I'm Bharat Sah",
-  subtitle: 'Building simple solutions to complex problems.',
+  eyebrow: 'Aspiring Junior React Developer',
+  headline: "Hi, I'm Bharat Kumar Sah.",
+  subtitle:
+    'I’m a +2 Computer Science graduate building practical, responsive web experiences with React, JavaScript, and Tailwind CSS.',
   about:
-    'I’m a motivated computer science graduate who enjoys creating useful websites and learning through practical projects. I like turning ideas into clean, responsive interfaces and getting better at front-end development one build at a time.',
+    'I’m a +2 Computer Science graduate and aspiring Junior React Developer. I learn by building practical web projects, with a focus on clear interfaces, responsive layouts, and accessible fundamentals.',
   // Replace with a real resume link or a file placed in /public (e.g. /resume.pdf)
   resumeUrl: import.meta.env.VITE_RESUME_URL || '#resume-download',
 }
@@ -20,9 +21,11 @@ export const profile = {
 //  Social / contact links (edit placeholders)
 // ----------------------------------------------------------------------------
 export const social = {
-  email: 'bharat.sah@example.com',
+  // Add a real public address here to enable the mailto fallback.
+  email: '',
   github: 'https://github.com/bharatsah',
   linkedin: 'https://www.linkedin.com/in/bharatsah',
+  instagram: 'https://www.instagram.com/bharatsah',
 }
 
 // ----------------------------------------------------------------------------
@@ -78,6 +81,36 @@ export const skillGroups = [
     ],
   },
   {
+    category: 'Programming Languages',
+    items: [
+      {
+        name: 'Python',
+        description: 'A general-purpose language for scripting and problem solving.',
+      },
+      {
+        name: 'PHP',
+        description: 'A server-side language used to build dynamic web applications.',
+      },
+      {
+        name: 'C',
+        description: 'A foundational programming language for core coding concepts.',
+      },
+    ],
+  },
+  {
+    category: 'Databases',
+    items: [
+      {
+        name: 'MySQL',
+        description: 'A relational database for storing and querying application data.',
+      },
+      {
+        name: 'PostgreSQL',
+        description: 'An open-source relational database with SQL support.',
+      },
+    ],
+  },
+  {
     category: 'Communication & Forms',
     items: [
       {
@@ -93,28 +126,13 @@ export const skillGroups = [
 // ----------------------------------------------------------------------------
 export const projects = [
   {
-    title: 'Project One',
+    title: 'Personal Portfolio',
     description:
-      'A short problem/solution description goes here. Replace this with what the project does and the problem it solves.',
-    tags: ['HTML', 'Tailwind CSS', 'JavaScript'],
-    codeUrl: '#',
-    demoUrl: '#',
-  },
-  {
-    title: 'Project Two',
-    description:
-      'A short problem/solution description goes here. Replace this with what the project does and the problem it solves.',
-    tags: ['React', 'Tailwind CSS'],
-    codeUrl: '#',
-    demoUrl: '#',
-  },
-  {
-    title: 'Project Three',
-    description:
-      'A short problem/solution description goes here. Replace this with what the project does and the problem it solves.',
-    tags: ['React', 'EmailJS'],
-    codeUrl: '#',
-    demoUrl: '#',
+      'A responsive single-page portfolio built with React, Vite, and Tailwind CSS. It brings together my background, skills, education, and current work in one place.',
+    tags: ['React', 'Tailwind CSS', 'Vite'],
+    codeUrl: social.github,
+    demoUrl: 'https://bharatsah.com.np/',
+    image: '',
   },
 ]
 

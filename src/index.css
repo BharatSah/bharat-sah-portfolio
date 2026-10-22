@@ -5,18 +5,59 @@
 @layer base {
   :root {
     color-scheme: dark;
+    background-color: #0a0a0b;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+    background-color: #0a0a0b;
+  }
+
+  #root {
+    min-height: 100vh;
   }
 
   html {
     /* Offset anchored sections so the sticky nav doesn't cover headings */
     scroll-padding-top: 5rem;
+    /* Stop decorative 3D/parallax layers from causing horizontal scroll */
+    overflow-x: clip;
   }
 
   body {
     @apply bg-ink text-chalk font-sans antialiased;
     background-image:
-      radial-gradient(900px 500px at 80% -10%, rgba(196, 240, 0, 0.06), transparent 60%),
+      radial-gradient(900px 500px at 80% -10%, rgba(255, 255, 255, 0.035), transparent 60%),
       linear-gradient(to bottom, #0a0a0b, #0a0a0b);
+    overflow-x: clip;
+  }
+
+  /* Lenis recommends disabling native smooth scrolling while it drives scroll */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  /* Split-text reveal: each line is a masked window, words rise into place */
+  .split-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+  .split-line {
+    display: block;
+  }
+  .split-word {
+    display: inline-block;
   }
 
   /* Visible focus states for keyboard users */
@@ -25,7 +66,7 @@
   }
 
   ::selection {
-    background: rgba(255, 255, 255, 0.85);
+    background: #ffffff;
     color: #0a0a0b;
   }
 }
@@ -40,7 +81,7 @@
   }
 
   .section-title {
-    @apply font-display text-3xl font-semibold text-chalk sm:text-4xl;
+    @apply font-display text-3xl font-semibold leading-tight text-chalk sm:text-4xl lg:text-5xl;
   }
 
   .card {

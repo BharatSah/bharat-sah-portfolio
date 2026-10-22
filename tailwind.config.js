@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Premium dark palette
+        // Monochrome surfaces and text: black, white, and neutral grays only.
         ink: {
           DEFAULT: '#0a0a0b', // near-black background
           soft: '#0f0f11', // raised background
@@ -16,7 +16,7 @@ export default {
           muted: '#a3a3a8', // muted gray descriptions
           faint: '#6b6b72', // very muted labels
         },
-        // One restrained accent — pure white (black & white theme)
+        // White accent against the near-black interface.
         paper: {
           DEFAULT: '#ffffff',
           soft: '#e5e5e5',
@@ -52,6 +52,14 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-18px)' },
         },
+        'caret-blink': {
+          '0%, 70%, 100%': { opacity: '1' },
+          '20%, 50%': { opacity: '0' },
+        },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'accent-grow': 'accent-grow 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
@@ -59,6 +67,8 @@ export default {
         'scroll-bounce': 'scroll-bounce 1.8s ease-in-out infinite',
         'grid-scroll': 'grid-scroll 3.5s linear infinite',
         'orb-float': 'orb-float 7s ease-in-out infinite',
+        'caret-blink': 'caret-blink 1.1s steps(1) infinite',
+        marquee: 'marquee 28s linear infinite',
       },
     },
   },

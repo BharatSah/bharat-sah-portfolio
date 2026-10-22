@@ -1,197 +1,135 @@
-import { useRef } from 'react'
 import { profile } from '../data/portfolio'
+import { scrollToTarget } from '../utils/scroll'
 import RotatingTypewriter from './RotatingTypewriter'
+import SectionBadge from './SectionBadge'
 
-const HEADING_PHRASES = [
-  "Hi, I'm Bharat Sah",
-  "I'm a Software Developer",
-  "I'm a React Developer",
-  "I'm a Frontend Developer",
-  'I build useful web experiences',
+const FOCUS_TECH = ['React', 'JavaScript', 'Tailwind CSS']
+const HERO_PHRASES = [
+  'Bharat Sah',
+  'React Developer',
+  'Web Developer',
 ]
 
 export default function Hero() {
-  const bgRef = useRef(null)
-  const glowRef = useRef(null)
-  const reduceRef = useRef(
-    typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  )
-
-  const handleMove = (e) => {
-    if (reduceRef.current) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-
-    if (bgRef.current) {
-      bgRef.current.style.transform =
-        `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) ` +
-        `rotateY(${(x * 6).toFixed(2)}deg) scale(1.04)`
-    }
-    if (glowRef.current) {
-      glowRef.current.style.opacity = '1'
-      glowRef.current.style.left = `${e.clientX - rect.left}px`
-      glowRef.current.style.top = `${e.clientY - rect.top}px`
-    }
-  }
-
-  const handleLeave = () => {
-    if (bgRef.current) {
-      bgRef.current.style.transform =
-        'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1.04)'
-    }
-    if (glowRef.current) glowRef.current.style.opacity = '0'
-  }
-
-  const scrollTo = (id) => {
-    const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const scrollTo = (id) => scrollToTarget(`#${id}`)
 
   return (
-    <section
-      id="home"
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16 text-center"
-    >
-      {/* Creative 3D background (mouse-reactive) */}
-      <div
-        ref={bgRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 origin-center transition-transform duration-300 ease-out"
-        style={{
-          transform:
-            'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1.04)',
-        }}
-      >
-        {/* Soft depth glow */}
-        <div className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
-
-        {/* Perspective grid floor */}
+    <section id="home" className="relative isolate overflow-hidden pt-16">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -right-36 -top-40 h-[34rem] w-[34rem] rounded-full bg-paper/10 blur-[130px]" />
         <div
-          className="absolute inset-x-0 bottom-0 h-2/3 origin-bottom animate-grid-scroll"
+          className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px)',
+              'linear-gradient(to right, rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.45) 1px, transparent 1px)',
             backgroundSize: '44px 44px',
-            transform: 'perspective(420px) rotateX(62deg)',
-            maskImage: 'linear-gradient(to top, black, transparent 78%)',
-            WebkitMaskImage: 'linear-gradient(to top, black, transparent 78%)',
-          }}
-        />
-
-        {/* Floating orbs */}
-        <div className="absolute left-[16%] top-[24%] h-44 w-44 rounded-full bg-white/10 blur-3xl animate-orb-float" />
-        <div
-          className="absolute right-[14%] top-[32%] h-28 w-28 rounded-full bg-white/[0.08] blur-3xl animate-orb-float"
-          style={{ animationDelay: '1.6s' }}
-        />
-
-        {/* Faint dot texture */}
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at center, rgba(255,255,255,0.16) 1px, transparent 1.6px)',
-            backgroundSize: '26px 26px',
           }}
         />
       </div>
 
-      {/* Cursor-following glow */}
-      <div
-        ref={glowRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-0 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 transition-opacity duration-300"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%)',
-        }}
-      />
+      <div className="container-page grid min-h-[calc(100svh-4rem)] items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div className="max-w-2xl">
+          <SectionBadge className="mt-6">Welcome to my portfolio</SectionBadge>
 
-      <div className="container-page relative flex flex-col items-center pb-24">
-        {/* Eyebrow — above the image */}
-        <p className="label flex items-center justify-center gap-3">
-          <span className="h-px w-8 bg-paper/60" />
-          {profile.eyebrow}
-          <span className="h-px w-8 bg-paper/60" />
-        </p>
+          <h1 className="mt-4 font-display text-3xl font-bold leading-[1.08] tracking-tight text-chalk text-balance sm:text-5xl lg:text-6xl">
+            <span className="block">Hi, I’m</span>
+            <span className="mt-1 block min-h-[1.15em] text-paper">
+              <RotatingTypewriter
+                phrases={HERO_PHRASES}
+                typeSpeed={85}
+                deleteSpeed={42}
+                pause={1500}
+                className="text-left"
+              />
+            </span>
+          </h1>
 
-        {/* Profile photo (centered) */}
-        <div className="relative my-10">
-          <span className="absolute -inset-4 rounded-full border border-dashed border-white/15" />
-          <div className="relative h-40 w-40 overflow-hidden rounded-full border border-white/15 bg-ink-card shadow-[0_0_60px_-15px_rgba(255,255,255,0.35)]">
+          <p className="mt-4 max-w-xl text-base leading-7 text-chalk-muted sm:text-lg sm:leading-8">
+            {profile.subtitle}
+          </p>
+
+          <div className="mt-6 flex flex-wrap justify-start gap-3">
+            <a
+              href="#projects"
+              onClick={(event) => {
+                event.preventDefault()
+                scrollTo('projects')
+              }}
+              className="btn-primary !rounded-xl px-7 py-4 text-base font-semibold"
+            >
+              Explore my work
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a
+              href="#contact"
+              onClick={(event) => {
+                event.preventDefault()
+                scrollTo('contact')
+              }}
+              className="btn-ghost !rounded-xl px-7 py-4 text-base"
+            >
+              Get in touch
+            </a>
+          </div>
+
+          <div className="mt-8 pt-2">
+            <p className="label">Currently building with</p>
+            <ul className="mt-3 flex flex-wrap justify-start gap-2" aria-label="Current technology focus">
+              {FOCUS_TECH.map((technology) => (
+                <li
+                  key={technology}
+                  className="rounded-full border border-ink-line bg-ink-card/60 px-3 py-1.5 font-mono text-xs text-chalk-muted"
+                >
+                  {technology}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <figure className="relative isolate mx-auto flex w-full max-w-md flex-col items-center lg:justify-self-end">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[19rem] w-[19rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl sm:h-[23rem] sm:w-[23rem] lg:h-[28rem] lg:w-[28rem]"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(255,255,255,0.14) 0%, rgba(210,210,210,0.08) 45%, transparent 72%)',
+            }}
+          />
+          <div className="absolute left-1 top-[18%] z-10 rounded-full border border-ink-line bg-ink-card px-3 py-2 font-mono text-xs text-chalk shadow-lg sm:left-0">
+            React
+          </div>
+          <div className="absolute bottom-[24%] right-0 z-10 rounded-full border border-ink-line bg-ink-card px-3 py-2 font-mono text-xs text-chalk shadow-lg sm:right-1">
+            UI that adapts
+          </div>
+          <div className="relative z-[1] h-64 w-64 overflow-hidden rounded-full border border-white/15 bg-ink-card shadow-[0_0_90px_-35px_rgba(255,255,255,0.14)] sm:h-80 sm:w-80 lg:h-[25rem] lg:w-[25rem]">
             <img
               src="/profile.png"
-              alt="Bharat Sah"
+              alt="Portrait of Bharat Sah"
+              width="480"
+              height="480"
+              decoding="async"
               className="h-full w-full object-cover"
             />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent"
+            />
           </div>
-          <span className="absolute -right-2 -top-2 h-3 w-3 rounded-full border border-paper bg-ink" />
-          <span className="absolute -bottom-2 -left-2 h-2 w-2 rounded-full bg-paper" />
-        </div>
-
-        {/* Rotating, cursorless typing heading — centered */}
-        <h1 className="mt-2 font-display text-4xl font-bold leading-tight text-chalk text-balance sm:text-6xl">
-          <RotatingTypewriter phrases={HEADING_PHRASES} />
-        </h1>
-
-        {/* Animated accent line */}
-        <span className="mt-6 block h-px w-24 origin-center bg-paper/70 animate-accent-grow" />
-
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-chalk-muted">
-          {profile.subtitle}
-        </p>
-
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => scrollTo('projects')}
-            className="btn-primary"
-          >
-            View My Projects
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollTo('contact')}
-            className="btn-ghost"
-          >
-            Contact Me
-          </button>
-        </div>
-
-        <dl className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4 text-sm">
-          <div>
-            <dt className="label">Focus</dt>
-            <dd className="mt-1 text-chalk">Front-end Development</dd>
-          </div>
-          <div>
-            <dt className="label">Stack</dt>
-            <dd className="mt-1 text-chalk">HTML · Tailwind · JS · React</dd>
-          </div>
-          <div>
-            <dt className="label">Status</dt>
-            <dd className="mt-1 text-chalk">Open to junior roles</dd>
-          </div>
-        </dl>
+        </figure>
       </div>
-
-      {/* Scroll-down indicator (clear of content) */}
-      <button
-        type="button"
-        onClick={() => scrollTo('about')}
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-chalk-faint hover:text-paper sm:flex"
-        aria-label="Scroll to next section"
-      >
-        <span className="font-mono text-[10px] uppercase tracking-label">
-          Scroll
-        </span>
-        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/20 p-1">
-          <span className="h-2 w-1 rounded-full bg-paper animate-scroll-bounce" />
-        </span>
-      </button>
     </section>
   )
 }

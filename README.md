@@ -1,81 +1,56 @@
-# Bharat Sah — Single-Page Portfolio
+# Bharat Sah — Portfolio
 
-A modern, responsive, single-page portfolio for **Bharat Sah**, a +2 Computer
-Science graduate and aspiring Junior React Developer. Built with **React +
-Vite**, **Tailwind CSS**, and **EmailJS** for the contact form.
+A responsive single-page portfolio built with React, Vite, and Tailwind CSS.
+
+## Important: Run with Vite, not Live Server
+
+This is a React/Vite project, not a plain static HTML page. Do **not** open `index.html` directly or use VS Code’s **Go Live / Live Server** button. The HTML entrypoint imports `/src/main.jsx`; Vite must transform that JSX and resolve the React modules. Live Server (often `http://127.0.0.1:5500`) serves the raw files, so the dark fallback background may appear with no portfolio content.
+
+### Run it from VS Code
+
+1. Open the project folder in VS Code. If you are using the ZIP, extract it first and open the extracted `portfolio-source-code` folder.
+2. Open **Terminal → New Terminal** in VS Code and make sure the terminal is in the project folder.
+3. Install dependencies once for that folder:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the Vite development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the URL printed by Vite, usually `http://localhost:5173/`. Do not use the Live Server URL on port `5500`.
+
+Press **Ctrl+C** in the terminal to stop Vite. After extracting the ZIP into a different folder, run `npm install` there too; `node_modules` is intentionally not included.
+
+## Production build
+
+```bash
+npm run build
+npm run preview
+```
+
+Vite prints the local preview URL after the build.
 
 ## Features
 
-- Premium dark theme (near-black background, charcoal cards, electric-lime accent)
-- Sticky nav with scroll-spy active highlighting + mobile hamburger menu
-- Sections: Home, About, Skills, Projects, Education, Contact, Footer
-- Download Resume button (top-right on desktop)
-- EmailJS contact form with client-side validation, loading / success / error states, and a `mailto` fallback
-- Smooth scrolling, reveal-on-scroll animations, thin scroll-progress bar
-- Fully responsive, accessible (focus states, alt text, semantic HTML), and `prefers-reduced-motion` aware
-- All personal data, links, and config centralized in `src/data/portfolio.js`
+- Monochrome black, white, and gray visual theme
+- Responsive navigation and portfolio sections
+- Reduced-motion-aware typewriter and reveal effects
+- Individual logo-backed skill cards and project actions
+- EmailJS contact form
+- In-browser one-page PDF resume generator
 
-## Getting started
+## Configuration and content
 
-```bash
-npm install
-npm run dev      # start the dev server (http://localhost:5173)
-npm run build    # production build into dist/
-npm run preview  # preview the production build
-```
+- Edit the profile, skills, projects, education, and links in `src/data/portfolio.js`.
+- Public images and SVG assets are under `public/`.
+- Copy `.env.example` to `.env` and fill in the EmailJS service ID, template ID, and public key if you need to configure the contact form. The real `.env` file is ignored by Git and is not included in the source ZIP; `.env.example` contains placeholders only.
+- Vite exposes variables prefixed with `VITE_` to the browser bundle. Use only EmailJS client-side public identifiers there—never put passwords or private API keys in them.
 
-> Requires Node.js 18+ (or 20+). Install it from https://nodejs.org if needed.
+## Troubleshooting
 
-## Configuration
-
-1. **Resume:** edit `resumeUrl` in `src/data/portfolio.js` (or set
-   `VITE_RESUME_URL` in a `.env` file). Drop a `resume.pdf` into `/public` and
-   point to `/resume.pdf`.
-2. **EmailJS:** copy `.env.example` to `.env` and fill in:
-   - `VITE_EMAILJS_SERVICE_ID`
-   - `VITE_EMAILJS_TEMPLATE_ID`
-   - `VITE_EMAILJS_PUBLIC_KEY`
-   
-   Until these are set, the contact form falls back to opening the visitor's
-   email client.
-3. **Content:** edit your name, about copy, skills, projects, and education in
-   `src/data/portfolio.js`. Replace project placeholders (`Project One`, etc.)
-   and their `codeUrl` / `demoUrl` with real links.
-
-## Project structure
-
-```
-.
-├── index.html
-├── tailwind.config.js
-├── postcss.config.js
-├── vite.config.js
-├── .env.example
-├── public/
-│   └── favicon.svg
-└── src/
-    ├── main.jsx
-    ├── App.jsx
-    ├── index.css
-    ├── data/
-    │   └── portfolio.js        # central place to edit everything
-    └── components/
-        ├── Navbar.jsx
-        ├── ScrollProgress.jsx
-        ├── Hero.jsx
-        ├── About.jsx
-        ├── Skills.jsx
-        ├── Projects.jsx
-        ├── Education.jsx
-        ├── Contact.jsx
-        ├── Footer.jsx
-        ├── Reveal.jsx
-        └── useScrollSpy.js
-```
-
-## Notes
-
-- No employment history, certifications, awards, or grades were invented — edit
-  the copy honestly in `src/data/portfolio.js`.
-- Private secrets are never hard-coded; only public EmailJS IDs/keys are used
-  via `import.meta.env`.
+If the address bar shows `127.0.0.1:5500`, stop Live Server and run `npm run dev` in the project folder instead. If the page is still blank at the Vite URL, open the browser developer tools (**F12 → Console**) and check the first red error.

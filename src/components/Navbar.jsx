@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { navLinks, profile } from '../data/portfolio'
+import { navLinks } from '../data/portfolio'
 import useScrollSpy from './useScrollSpy'
+import { generateResume } from '../utils/generateResume'
+import { scrollToTarget } from '../utils/scroll'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -26,8 +28,7 @@ export default function Navbar() {
   const handleNav = (e, id) => {
     e.preventDefault()
     setOpen(false)
-    const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    scrollToTarget(`#${id}`)
   }
 
   return (
@@ -38,24 +39,9 @@ export default function Navbar() {
           : 'border-b border-transparent'
       }`}
     >
-      <nav className="container-page flex h-16 items-center justify-between">
-        {/* Brand */}
-        <a
-          href="#home"
-          onClick={(e) => handleNav(e, 'home')}
-          className="group flex items-center gap-2.5"
-          aria-label={`${profile.name} — home`}
-        >
-          <span className="grid h-9 w-9 place-items-center rounded-lg border border-ink-line font-display text-sm font-bold text-paper">
-            BS
-          </span>
-          <span className="font-display text-sm font-semibold tracking-wide text-chalk">
-            Bharat<span className="text-paper">.</span>
-          </span>
-        </a>
-
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
+      <nav className="container-page grid h-16 grid-cols-[1fr_auto_1fr] items-center">
+        {/* Desktop links centered in the middle grid column */}
+        <ul className="hidden items-center justify-center gap-1 lg:col-start-2 lg:flex">
           {navLinks.map((link) => (
             <li key={link.id}>
               <a
@@ -80,19 +66,21 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop resume button */}
-        <a
-          href={profile.resumeUrl}
-          download
-          className="btn-primary hidden md:inline-flex"
-        >
-          Download Resume
-        </a>
+        <div className="hidden justify-self-end lg:col-start-3 lg:block">
+          <button
+            type="button"
+            onClick={generateResume}
+            className="btn-primary !rounded-lg"
+          >
+            Download Resume
+          </button>
+        </div>
 
         {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-lg border border-ink-line text-chalk md:hidden"
+          className="col-start-3 grid h-10 w-10 justify-self-end place-items-center rounded-lg border border-ink-line text-chalk lg:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
         >
@@ -118,17 +106,17 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`overflow-hidden border-t border-ink-line bg-ink/95 backdrop-blur md:hidden ${
+          className={`overflow-hidden border-t border-ink-line bg-ink/95 backdrop-blur lg:hidden ${
           open ? 'max-h-96' : 'max-h-0'
         } transition-[max-height] duration-300`}
       >
-        <ul className="container-page flex flex-col gap-1 py-4">
+        <ul className="container-page flex flex-col items-center gap-1 py-4">
           {navLinks.map((link) => (
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
                 onClick={(e) => handleNav(e, link.id)}
-                className={`block rounded-lg px-3 py-3 text-base ${
+                className={`block w-full rounded-lg px-3 py-3 text-center text-base ${
                   active === link.id
                     ? 'bg-ink-card text-paper'
                     : 'text-chalk-muted'
@@ -140,13 +128,13 @@ export default function Navbar() {
             </li>
           ))}
           <li className="pt-2">
-            <a
-              href={profile.resumeUrl}
-              download
-              className="btn-primary w-full"
+            <button
+              type="button"
+              onClick={generateResume}
+              className="btn-primary !rounded-lg w-full"
             >
               Download Resume
-            </a>
+            </button>
           </li>
         </ul>
       </div>
