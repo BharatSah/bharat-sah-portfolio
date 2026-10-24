@@ -6,13 +6,13 @@
 
 export const profile = {
   name: 'Bharat Sah',
-  role: 'Aspiring Junior React Developer',
-  eyebrow: 'Aspiring Junior React Developer',
+  role: 'React Developer',
+  eyebrow: 'React Developer',
   headline: "Hi, I'm Bharat Kumar Sah.",
   subtitle:
     'I’m a +2 Computer Science graduate building practical, responsive web experiences with React, JavaScript, and Tailwind CSS.',
   about:
-    'I’m a +2 Computer Science graduate and aspiring Junior React Developer. I learn by building practical web projects, with a focus on clear interfaces, responsive layouts, and accessible fundamentals.',
+    'I’m a +2 Computer Science graduate and React Developer. I learn by building practical web projects, with a focus on clear interfaces, responsive layouts, and accessible fundamentals.',
   // Replace with a real resume link or a file placed in /public (e.g. /resume.pdf)
   resumeUrl: import.meta.env.VITE_RESUME_URL || '#resume-download',
 }

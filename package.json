@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Single-page portfolio for Bharat Sah — +2 Computer Science graduate and aspiring Junior React Developer.",
+  "description": "Single-page portfolio for Bharat Sah — React Developer and +2 Computer Science graduate.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

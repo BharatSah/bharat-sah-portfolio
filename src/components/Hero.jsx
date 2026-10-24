@@ -116,7 +116,7 @@ export default function Hero() {
           </div>
           <div className="relative z-[1] h-64 w-64 overflow-hidden rounded-full border border-white/15 bg-ink-card shadow-[0_0_90px_-35px_rgba(255,255,255,0.14)] sm:h-80 sm:w-80 lg:h-[25rem] lg:w-[25rem]">
             <img
-              src="/profile.png"
+              src="/profile-transparent.png"
               alt="Portrait of Bharat Sah"
               width="480"
               height="480"
