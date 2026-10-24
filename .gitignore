@@ -12,11 +12,9 @@ dist-ssr
 # Editor / OS
 .vscode/*
 !.vscode/extensions.json
-# Local task artifacts and generated deliverables are not portfolio source.
+# Local Manus working artifacts; final deliverables stay in outputs/.
 .manus/
 .work/
-# Local audit, generated resume, and source bundle.
-/outputs/
 .idea
 .DS_Store
 *.log
